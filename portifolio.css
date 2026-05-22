@@ -1,0 +1,40 @@
+body {
+    color: white;
+    background-color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+}
+ul{
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    align-items: center;
+    padding: 17px;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+img{ 
+    width: 150px;
+}
+h1{
+    color: rgb(0, 190, 0);
+     font-size: 48px;
+     margin-left: 25px;
+}
+h2{
+
+    font-size: 32px;
+    margin-left: 40px;
+}
+h3{
+    font-size: 22px;
+    margin-left: 40px;
+}
+p{
+    margin-right: 50px;
+    margin-left: 60px;
+}
+    
+
+
