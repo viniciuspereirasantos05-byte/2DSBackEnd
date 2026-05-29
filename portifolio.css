@@ -26,15 +26,47 @@ h2{
 
     font-size: 32px;
     margin-left: 40px;
+    color: blueviolet;
 }
 h3{
-    font-size: 22px;
+    font-size: 26px;
     margin-left: 40px;
+    color: blue;
 }
 p{
     margin-right: 50px;
     margin-left: 60px;
+    font-size: 18px;
+    color: bisque;
+    text-align: justify;
 }
+h4{
+    font-size: 29px;
+    margin-left: 45px;
+    color: blue;
+}
+h5{
+    font-size: 30px;
+    margin-left: 44px;
+    color: blue;
+}
+h6{
+    margin-top: 0%;
+    margin-left: 60px;
+    font-size: 19px;
+    width: 50px;
+    color: bisque;
+
+
+}
+p.new{
+    font-size: 19px;
+    width: 2px;
+    color: bisque;
     
+}
+img{
+    margin-left: 300px;
+}
 
 
