@@ -1,37 +1,37 @@
-//npm init
-//nmp i express
-//install a extenção
-const express = require ("express")
+// npm init
+// npm i express
+// instalar extensão RapidAPI Client no VSCode
+const express = require("express")
 const app = express()
 const port = 3000
 app.use(express.json())
 const fs = require('fs')
 
-
-app.get("/ola", (req, res) => {
-   res.json({resposta: "Olá mundo!"})
-})
-
 app.post("/clientes", (req, res) => {
     const cliente = req.body
-    //abrir o arquirvo
-    try{
-        const bd = JSON.parse(fs.readdilesSync("bd.json", "utf-8"))
-        bd.push(cliete)
-        fs.weiteFileSync("bd.json", JSON.stringify(bd), "utf-8")
-    } catch (erro){
-        res.status(500).json({erro:erro.mensage})
-        
-
+    try {
+        // abrir o arquivo
+        const bd = JSON.parse(fs.readFileSync("bd.json", "utf8"))
+        // adicionar o cliente
+        bd.push(cliente)
+        // salvar o arquivo
+        fs.writeFileSync("bd.json", JSON.stringify(bd), "utf8")
+        // resposta
+        res.status(201).json({resposta: "Cliente cadastrado!"})
+    } catch (erro) {
+        res.status(500).json({erro: erro.message})
     }
-    //adicionar o cliente 
-    //salvar o arquivo
-    //resposta
-    
 })
 
+app.get("/clientes", (req, res) => {
+    try{
+    const bd = json.parse(fs.readFileSync("bd.json", "utf8"))
+    res.status(200).json({resposta: bd})
+    }  catch (erro) {
+        res.status(500).json({erro: erro.mensage})
+    }
+})
 
 app.listen(port, ()=>{
-   console.log("API rodando na porta" + port)
+    console.log("API rodando na porta" + port)
 })
-
