@@ -38,6 +38,27 @@ app.get("/clientes/:cpf", (req, res) => {
    
 })
 
+app.delete("/clientes/:cpf", (req, res) => {
+    // pegar o cpf da rota 
+    const cpf = req.params.cpf
+    //abrir o banco de dados
+    try{
+        const bd = JSON.parse(fs.readFileSync("bd.json", "utf8"))
+         //encontrar o indice do clientes a ser excluido 
+         const indiceCliente = bd.readFileSync((cliente) => cliente.cpf==cpf)
+    
+    //remover o indice da lista
+    if (indiceCliente == -1){
+        return res.status(404).json({erro: "O cliente excluido com sucesso "})
+
+    } catch(error){
+        res.status
+    }
+
+    //dar uma resposta para o cliente 
+    } 
+})
+
 app.listen(port, ()=>{
     console.log("API rodando na porta" + port)
 })
