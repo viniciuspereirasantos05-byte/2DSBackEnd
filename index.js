@@ -1,66 +1,57 @@
-// npm init
-// npm i express
-// instalar extensão RapidAPI Client no VSCode
+/* 
+Instale as bibliotecas e o cliente de API:
+npm init
+npm i express
+Procure pela extensão RapidAPI Client no VSCode.
+*/
+// Para executar a API no terminal: node index.js
+// Link para testar a API: http://localhost:3000/rota
 const express = require("express")
 const app = express()
 const port = 3000
-app.use(express.json())
-const fs = require('fs')
+app.use(express.json()) // configura API para usar JSON.
+const fs = require('fs') // importa leitura e escrita de arquivos.
 
-app.post("/clientes", (req, res) => {
-    const cliente = req.body
+app.post("/famosos" , (req, res) => {
+    const famosos = req.body
     try {
-        // abrir o arquivo
-        const bd = JSON.parse(fs.readFileSync("bd.json", "utf8"))
-        // adicionar o cliente
-        bd.push(cliente)
-        // salvar o arquivo
-        fs.writeFileSync("bd.json", JSON.stringify(bd), "utf8")
-        // resposta
-        res.status(201).json({resposta: "Cliente cadastrado!"})
-    } catch (erro) {
+        const bd = JSON.parse(fs.readFileSync("famosos.json", "utf8"))
+        bd.push(famosos)
+        fs.writeFileSync("famosos.json", JSON.stringify(bd), "utf8")
+        res.status(201).json({resposta: "famoso cadastrado!"})
+    }  catch (erro) {
         res.status(500).json({erro: erro.message})
     }
+
 })
 
-app.get("/clientes/:cpf", (req, res) => {
-    const cpf  = req.params.cpf
-    try{
-        const bd = JSON.parse(fs.readFileSync("bd.json", "utf8"))
-        const cliente = bd.find((cliente) => cliente.cpf == cpf)
-        if(!cliente){
-            return res.status(404).json({erro: "cliente não existe no BD"})
-        }
-        res.status(200).json({resposta: cliente})
-        }  catch (erro) {
-            res.status(500).json({erro: erro.mensage})
-        }
-   
-})
-
-app.delete("/clientes/:cpf", (req, res) => {
-    // pegar o cpf da rota 
-    const cpf = req.params.cpf
-    //abrir o banco de dados
-    try{
-        const bd = JSON.parse(fs.readFileSync("bd.json", "utf8"))
-         //encontrar o indice do clientes a ser excluido 
-         const indiceCliente = bd.readFileSync((cliente) => cliente.cpf==cpf)
-    
-    //remover o indice da lista
-    if (indiceCliente == -1){
-        return res.status(404).json({erro: "O cliente excluido com sucesso "})
-
-    } catch(error){
-        res.status
+  app.get("/famosos", (req, res) => {
+    try {
+        const bd = JSON.parse(fs.readFileSync("famosos.json", "utf8"))
+        res.status(200).json({resposta: bd})
+    } catch(erro) {
+        res.status(500).json({erro: erro.message})
     }
+  })
 
-    //dar uma resposta para o cliente 
-    } 
-})
+  app.delete("/famosos/:id", (req, res) => {
+    const id = req.params.id
+    try {
+        const bd = JSON.parse(fs.readFileSync("famosos.json", "utf8"))
+        const indiceFamosos = bd.findIndex((famosos) => famosos.id ==id)
+        if (indiceFamosos == -1) {
+            return res.status(404).json({erro: "O famoso não existe"})
+        }
+        bd.splice(indiceFamosos, 1)
+        fs.writeFileSync("famosos.json", JSON.stringify(bd), "utf8")
+        res.status(200).json({resposta: "famoso excluido com sucesso"})
+    } catch(error){
+        res.status(500).json({erro: error.message})
+    }
+  })
 
+
+// Execução da API:
 app.listen(port, ()=>{
-    console.log("API rodando na porta" + port)
+    console.log("API rodando na porta " + port)
 })
-
-// http://localhost:3000/clientes 
